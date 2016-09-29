@@ -20,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Kristenlk\\Marketo\\": "src/"
+            "Kristenlk\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Kristenlk\\Marketo\\Test\\": "test/src/"
+            "Kristenlk\\Test\\": "test/src/"
         }
     }
 }
