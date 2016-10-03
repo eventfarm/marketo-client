@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 use Kristenlk\OAuth2\Client\Provider\Marketo;
+use Kristenlk\OAuth2\Client\Token\AccessToken;
 
 class BaseClient
 {
@@ -14,21 +15,21 @@ class BaseClient
     protected $clientSecret;
     protected $baseUrl;
     protected $accessToken;
-    protected $authCallback;
+    protected $tokenRefreshObject;
     protected $guzzle;
     protected $retryCount = 4;
 
     const TOKEN_INVALID = 601;
     const TOKEN_EXPIRED = 602;
 
-    public function __construct($clientId, $clientSecret, $baseUrl, $authCallback, $accessToken)
+    public function __construct($clientId, $clientSecret, $baseUrl, $tokenRefreshObject, $accessToken)
     {
-        $this->clientId     = $clientId;
-        $this->clientSecret = $clientSecret;
-        $this->baseUrl      = $baseUrl;
-        $this->authCallback = $authCallback;
-        $this->accessToken  = $accessToken;
-        $this->guzzle       = new Guzzle(['base_uri' => $this->baseUrl]);
+        $this->clientId           = $clientId;
+        $this->clientSecret       = $clientSecret;
+        $this->baseUrl            = $baseUrl;
+        $this->tokenRefreshObject = $tokenRefreshObject;
+        $this->accessToken        = $accessToken;
+        $this->guzzle             = new Guzzle(['base_uri' => $this->baseUrl]);
 
         $this->authParams = [
             'clientId' => $this->clientId,
@@ -79,9 +80,6 @@ class BaseClient
 
     public function request(string $method, string $uri, array $options = []):Response
     {
-        var_dump("here's the access token in the BaseClient request() method");
-        var_dump($this->accessToken);
-
         $count = 0;
 
         do {
@@ -102,19 +100,25 @@ class BaseClient
             $count++;
         } while($count <= $this->retryCount && (!$responseAuthorized || !$tokenValid));
 
-        return $responseBody;
+        return $response;
     }
 
     private function requestMarketoAccessToken()
     {
-        var_dump("requesting a Marketo access token");
         $provider = new Marketo($this->authParams);
         $tokenResponse = $provider->getAccessToken('client_credentials');
         $accessToken = $tokenResponse->getToken();
-        var_dump("here's the access token in the BaseClient requestMarketoAccessToken() method after we get a new access token:");
-        var_dump($accessToken);
         $this->accessToken = $accessToken;
-        // call the authCallback method here
+
+        if (!empty($this->tokenRefreshObject)) {
+            $this->tokenRefreshObject->tokenRefreshCallback($tokenResponse);
+        }
+
         return $accessToken;
+    }
+
+    protected function getBodyObjectFromResponse(ResponseInterface $request)
+    {
+        return (object) json_decode($request->getBody()->__toString());
     }
 }
