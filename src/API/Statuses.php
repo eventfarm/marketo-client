@@ -3,14 +3,10 @@ namespace Kristenlk\Marketo\API;
 
 use stdClass;
 
-class Programs extends BaseClient {
-    public function getPrograms(array $options = array())//:stdClass
+class Statuses extends BaseClient {
+    public function Statuses(string $programChannel)//:stdClass
     {
-        if (count($options) > 0) {
-            $endpoint = '/rest/asset/v1/programs.json?maxReturn=200&offset=' . $options['offset'];
-        } else {
-            $endpoint = '/rest/asset/v1/programs.json?maxReturn=200';
-        }
+        $endpoint = '/rest/asset/v1/channel/byName.json?name=' . $programChannel;
 
         $response = $this->request("get", $endpoint);
 

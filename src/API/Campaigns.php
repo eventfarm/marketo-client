@@ -3,13 +3,13 @@ namespace Kristenlk\Marketo\API;
 
 use stdClass;
 
-class Programs extends BaseClient {
-    public function getPrograms(array $options = array())//:stdClass
+class Campaigns extends BaseClient {
+    public function getCampaigns(string $programName, array $options = array())//:stdClass
     {
-        if (count($options) > 0) {
-            $endpoint = '/rest/asset/v1/programs.json?maxReturn=200&offset=' . $options['offset'];
+        if ($options) {
+            $endpoint = '/rest/v1/campaigns.json?batchSize=1&programName=' . $programName . '&nextPageToken=' . $options['nextPageToken'];
         } else {
-            $endpoint = '/rest/asset/v1/programs.json?maxReturn=200';
+            $endpoint = '/rest/v1/campaigns.json?batchSize=1&programName=' . $programName;
         }
 
         $response = $this->request("get", $endpoint);

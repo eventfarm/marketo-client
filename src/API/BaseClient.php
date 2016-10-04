@@ -45,22 +45,22 @@ class BaseClient
         }
     }
 
-    private function isTokenValid($errors)
+    private function isTokenValid($responseBody):bool
     {
-        $errorCodes = array(self::TOKEN_INVALID, self::TOKEN_EXPIRED);
+        // Depending on the endpoint, the JSON Marketo returns will always contain an errors key (like getPrograms does) or will only contain an errors key if there are errors (like getCampaigns does)
+        if (property_exists($responseBody, "errors")) {
+            if (isset($responseBody->errors)) {
+                $errorCodes = array(self::TOKEN_INVALID, self::TOKEN_EXPIRED);
 
-        if ($errors) {
-            foreach($errors as $error) {
-                if (in_array($error->code, $errorCodes)) {
-                    $this->refreshAccessToken();
-                    return false;
-                } else {
-                    return true;
+                foreach($responseBody->errors as $error) {
+                    if (in_array($error->code, $errorCodes)) {
+                        $this->refreshAccessToken();
+                        return false;
+                    }
                 }
             }
-        } else {
-            return true;
         }
+        return true;
     }
 
     private function isResponseAuthorized(int $statusCode):bool
@@ -94,7 +94,7 @@ class BaseClient
             $response = $this->guzzle->request($method, $uri, $overrideOptions);
             $responseBody = json_decode($response->getBody()->__toString());
 
-            $tokenValid = $this->isTokenValid($responseBody->errors);
+            $tokenValid = $this->isTokenValid($responseBody);
             $responseAuthorized = $this->isResponseAuthorized($response->getStatusCode());
 
             $count++;
