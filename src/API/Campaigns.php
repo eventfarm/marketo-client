@@ -6,10 +6,10 @@ use stdClass;
 class Campaigns extends BaseClient {
     public function getCampaigns(string $programName, array $options = array())//:stdClass
     {
-        if ($options) {
-            $endpoint = '/rest/v1/campaigns.json?batchSize=1&programName=' . $programName . '&nextPageToken=' . $options['nextPageToken'];
-        } else {
-            $endpoint = '/rest/v1/campaigns.json?batchSize=1&programName=' . $programName;
+        $endpoint = '/rest/v1/campaigns.json?programName=' . $programName;
+
+        if (!empty($options['nextPageToken'])) {
+            $endpoint = $endpoint . '&nextPageToken=' . $options['nextPageToken'];
         }
 
         $response = $this->request("get", $endpoint);

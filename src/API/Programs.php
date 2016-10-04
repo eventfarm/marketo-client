@@ -6,10 +6,10 @@ use stdClass;
 class Programs extends BaseClient {
     public function getPrograms(array $options = array())//:stdClass
     {
-        if (count($options) > 0) {
-            $endpoint = '/rest/asset/v1/programs.json?maxReturn=200&offset=' . $options['offset'];
-        } else {
-            $endpoint = '/rest/asset/v1/programs.json?maxReturn=200';
+        $endpoint = '/rest/asset/v1/programs.json?maxReturn=200';
+
+        if (!empty($options['offset'])) {
+            $endpoint = $endpoint . '&offset=' . $options['offset'];
         }
 
         $response = $this->request("get", $endpoint);

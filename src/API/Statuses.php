@@ -4,7 +4,7 @@ namespace Kristenlk\Marketo\API;
 use stdClass;
 
 class Statuses extends BaseClient {
-    public function Statuses(string $programChannel)//:stdClass
+    public function getStatuses(string $programChannel)//:stdClass
     {
         $endpoint = '/rest/asset/v1/channel/byName.json?name=' . $programChannel;
 
