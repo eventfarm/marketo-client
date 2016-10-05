@@ -20,5 +20,29 @@ class Campaigns extends BaseClient {
 
         return $responseBody;
     }
+
+    public function triggerCampaign(int $campaignId, array $options = array())//:stdClass
+    {
+        $endpoint = '/rest/v1/campaigns/' . $campaignId . '/trigger.json';
+
+        $requestOptions = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+            'json' => []
+        ];
+
+        foreach ($options as $key => $value) {
+            $requestOptions['json'][$key] = $value;
+        }
+
+        $response = $this->request('post', $endpoint, $requestOptions);
+
+        // If $response->getStatusCode() !== 200, throw an error - don't call getBodyObjectFromResponse(). If there are errors, the status still looks to be 200
+
+        $responseBody = $this->getBodyObjectFromResponse($response);
+
+        return $responseBody;
+    }
 }
 ?>

@@ -6,6 +6,7 @@ use Kristenlk\Marketo\API\Campaigns;
 use Kristenlk\Marketo\API\LeadFields;
 use Kristenlk\Marketo\API\Statuses;
 use Kristenlk\Marketo\API\Leads;
+use Kristenlk\Marketo\API\Partitions;
 use Kristenlk\Marketo\API\TokenRefreshCallbackInterface;
 use Kristenlk\OAuth2\Client\Token\AccessToken;
 use GuzzleHttp\Client as Guzzle;
@@ -90,5 +91,10 @@ class MarketoClient
     public function leads()
     {
         return new Leads($this->clientId, $this->clientSecret, $this->baseUrl, $this->tokenRefreshObject, $this->accessToken);
+    }
+
+    public function partitions()
+    {
+        return new Partitions($this->clientId, $this->clientSecret, $this->baseUrl, $this->tokenRefreshObject, $this->accessToken);
     }
 }
