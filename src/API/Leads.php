@@ -4,7 +4,7 @@ namespace Kristenlk\Marketo\API;
 use stdClass;
 
 class Leads extends BaseClient {
-    public function createOrUpdateLeads(array $leadData, array $options = array())//:stdClass
+    public function createOrUpdateLeads(array $options = array())//:stdClass
     {
         $endpoint = '/rest/v1/leads.json';
 
@@ -12,17 +12,12 @@ class Leads extends BaseClient {
             'headers' => [
                 'Content-Type' => 'application/json',
             ],
-            'json' => [
-                'input' => $leadData
-            ]
+            'json' => []
         ];
 
         foreach ($options as $key => $value) {
             $requestOptions['json'][$key] = $value;
         }
-
-        var_dump($requestOptions);
-
 
         $response = $this->request('post', $endpoint, $requestOptions);
 
@@ -33,19 +28,23 @@ class Leads extends BaseClient {
         return $responseBody;
     }
 
-    public function updateLeadsProgramStatus(int $programId, string $status, array $leadIds)//:stdClass
+    public function updateLeadsProgramStatus(int $programId, array $options = array())//:stdClass
     {
         $endpoint = '/rest/v1/leads/programs/' . $programId . '/status.json';
 
-        $response = $this->request('post', $endpoint, [
+        $requestOptions = [
             'headers' => [
                 'Content-Type' => 'application/json',
             ],
-            'json' => [
-                'status' => $status,
-                'input' => $leadIds
-            ]
-        ]);
+            'json' => []
+        ];
+
+
+        foreach ($options as $key => $value) {
+            $requestOptions['json'][$key] = $value;
+        }
+
+        $response = $this->request('post', $endpoint, $requestOptions);
 
         // If $response->getStatusCode() !== 200, throw an error - don't call getBodyObjectFromResponse(). If there are errors, the status still looks to be 200
 
