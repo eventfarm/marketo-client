@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=7.0.0",
         "guzzlehttp/guzzle": "~6.0|~5.0|~4.0",
         "kristenlk/oauth2-marketo": "1.5"
     },

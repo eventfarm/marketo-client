@@ -1,20 +1,29 @@
 <?php
 namespace Kristenlk\Marketo\API;
 
-use stdClass;
+use Kristenlk\Marketo\RestClient\MarketoRestClient;
 
-class Statuses extends BaseClient {
-    public function getStatuses(string $programChannel)//:stdClass
+class Statuses {
+    /**
+     * @var MarketoClientInterface
+     */
+    private $marketoRestClient;
+
+    public function __construct(MarketoRestClient $marketoRestClient)
+    {
+        $this->marketoRestClient = $marketoRestClient;
+    }
+
+    public function getStatuses(string $programChannel)
     {
         $endpoint = '/rest/asset/v1/channel/byName.json?name=' . $programChannel;
 
-        $response = $this->request("get", $endpoint);
-
-        // If $response->getStatusCode() !== 200, throw an error - don't call getBodyObjectFromResponse(). If there are errors, the status still looks to be 200
-
-        $responseBody = $this->getBodyObjectFromResponse($response);
-
-        return $responseBody;
+        try {
+            $response = $this->marketoRestClient->request('get', $endpoint);
+            return $this->marketoRestClient->getBodyObjectFromResponse($response);
+        } catch (MarketoException $e) {
+            print_r('Unable to get statuses: ' . $e);
+        }
     }
 }
 ?>

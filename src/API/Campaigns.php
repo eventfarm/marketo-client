@@ -1,10 +1,21 @@
 <?php
 namespace Kristenlk\Marketo\API;
 
-use stdClass;
+use Kristenlk\Marketo\RestClient\MarketoRestClient;
 
-class Campaigns extends BaseClient {
-    public function getCampaigns(string $programName, array $options = array())//:stdClass
+
+class Campaigns {
+    /**
+     * @var MarketoClientInterface
+     */
+    private $marketoRestClient;
+
+    public function __construct(MarketoRestClient $marketoRestClient)
+    {
+        $this->marketoRestClient = $marketoRestClient;
+    }
+
+    public function getCampaigns(string $programName, array $options = array())
     {
         $endpoint = '/rest/v1/campaigns.json?programName=' . $programName;
 
@@ -12,13 +23,12 @@ class Campaigns extends BaseClient {
             $endpoint = $endpoint . '&nextPageToken=' . $options['nextPageToken'];
         }
 
-        $response = $this->request("get", $endpoint);
-
-        // If $response->getStatusCode() !== 200, throw an error - don't call getBodyObjectFromResponse(). If there are errors, the status still looks to be 200
-
-        $responseBody = $this->getBodyObjectFromResponse($response);
-
-        return $responseBody;
+        try {
+            $response = $this->marketoRestClient->request('get', $endpoint);
+            return $this->marketoRestClient->getBodyObjectFromResponse($response);
+        } catch (MarketoException $e) {
+            print_r('Unable to get campaigns: ' . $e);
+        }
     }
 
     public function triggerCampaign(int $campaignId, array $options = array())//:stdClass
@@ -36,13 +46,12 @@ class Campaigns extends BaseClient {
             $requestOptions['json'][$key] = $value;
         }
 
-        $response = $this->request('post', $endpoint, $requestOptions);
-
-        // If $response->getStatusCode() !== 200, throw an error - don't call getBodyObjectFromResponse(). If there are errors, the status still looks to be 200
-
-        $responseBody = $this->getBodyObjectFromResponse($response);
-
-        return $responseBody;
+        try {
+            $response = $this->marketoRestClient->request('post', $endpoint, $requestOptions);
+            return $this->marketoRestClient->getBodyObjectFromResponse($response);
+        } catch (MarketoException $e) {
+            print_r('Unable to trigger campaign: ' . $e);
+        }
     }
 }
 ?>
