@@ -69,7 +69,7 @@ class Leads {
         if (!empty($options['fields'])) {
             if (strpos($endpoint, '.json?')) {
                 $endpoint = $endpoint . '&fields=' . $options['fields'];
-            else {
+            } else {
                 $endpoint = $endpoint . '?fields=' . $options['fields'];
             }
         }
@@ -77,7 +77,7 @@ class Leads {
         if (!empty($options['nextPageToken'])) {
             if (strpos($endpoint, '.json?')) {
                 $endpoint = $endpoint . '&nextPageToken=' . $options['nextPageToken'];
-            else {
+            } else {
                 $endpoint = $endpoint . '?nextPageToken=' . $options['nextPageToken'];
             }
         }

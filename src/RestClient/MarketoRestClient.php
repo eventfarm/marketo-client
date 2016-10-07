@@ -135,12 +135,15 @@ class MarketoRestClient
     {
         $attempts = 0;
         do {
+            if (time() >= $this->accessToken->getExpiresIn() - 300) {
+                $this->refreshAccessToken();
+            }
+
             $options = $this->mergeOptions($options);
             $response = $this->restClient->request($method, $uri, $options);
-            $isAuthorized = $this->isResponseAuthorized($response);
-
             $responseBody = json_decode($response->getBody()->__toString());
-            var_dump($responseBody);
+
+            $isAuthorized = $this->isResponseAuthorized($response);
             $isTokenValid = $this->isTokenValid($responseBody);
 
             if (!$isAuthorized || !$isTokenValid) {

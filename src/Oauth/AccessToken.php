@@ -18,7 +18,7 @@ class AccessToken implements AccessTokenInterface
     ) {
         $this->accessToken = $accessToken;
         $this->expiresIn = $expiresIn;
-        $this->lastRefresh = $lastRefresh ?? time(); // Set this to an integer
+        $this->lastRefresh = $lastRefresh ?? time();
     }
 
     public function getToken():string
