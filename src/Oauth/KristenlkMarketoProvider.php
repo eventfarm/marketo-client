@@ -8,7 +8,7 @@ class KristenlkMarketoProvider implements MarketoProviderInterface
     /**
      * @var Marketo
      */
-    private $marketo;
+    public $marketo;
 
     public static function createDefaultProvider(
         string $clientId,

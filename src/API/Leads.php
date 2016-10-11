@@ -64,7 +64,7 @@ class Leads {
     public function getLeadsByProgram(int $programId, array $options = array())
     {
         // Add &batchSize=1 to test batches of campaigns
-        $endpoint = '/rest/v1/leads/programs/' . $programId . '.json?batchSize=1';
+        $endpoint = '/rest/v1/leads/programs/' . $programId . '.json';
 
         if (!empty($options['fields'])) {
             if (strpos($endpoint, '.json?')) {

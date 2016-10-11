@@ -7,7 +7,6 @@ use Kristenlk\Marketo\Oauth\RetryAuthorizationTokenFailedException;
 use Kristenlk\Marketo\TokenRefreshInterface;
 use Kristenlk\Marketo\RestClient\RestClientInterface;
 use Psr\Http\Message\ResponseInterface;
-//use Psr\Http\Message\ResponseInterface;
 
 class MarketoRestClient
 {
@@ -106,11 +105,7 @@ class MarketoRestClient
 
     private function refreshAccessToken()
     {
-        $tokenResponse = $this->marketoProvider->getAccessToken('client_credentials', [
-            'clientId' => $this->clientId,
-            'clientSecret' => $this->clientSecret,
-            'baseUrl' => $this->baseUrl
-        ]);
+        $tokenResponse = $this->marketoProvider->getAccessToken('client_credentials');
 
         if (!empty($this->tokenRefreshCallback)) {
             $this->tokenRefreshCallback->tokenRefreshCallback($tokenResponse);
@@ -127,7 +122,8 @@ class MarketoRestClient
             ]
         ];
 
-        $options = array_merge($options, $defaultOptions);
+        $options = array_replace_recursive($options, $defaultOptions);
+
         return $options;
     }
 
@@ -135,7 +131,7 @@ class MarketoRestClient
     {
         $attempts = 0;
         do {
-            if (time() >= $this->accessToken->getExpiresIn() - 300) {
+            if (time() >= $this->accessToken->getExpires() - 300) {
                 $this->refreshAccessToken();
             }
 

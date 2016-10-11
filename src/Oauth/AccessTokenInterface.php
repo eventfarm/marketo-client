@@ -5,5 +5,5 @@ interface AccessTokenInterface
 {
     public function getToken():string;
     public function getLastRefresh():int;
-    public function getExpiresIn():int;
+    public function getExpires():int;
 }

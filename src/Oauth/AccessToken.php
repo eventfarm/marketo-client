@@ -31,7 +31,7 @@ class AccessToken implements AccessTokenInterface
         $this->accessToken = $accessToken;
     }
 
-    public function getExpiresIn():int
+    public function getExpires():int
     {
         return $this->expiresIn;
     }
