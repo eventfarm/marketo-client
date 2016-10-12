@@ -15,12 +15,15 @@ class Campaigns
         $this->marketoRestClient = $marketoRestClient;
     }
 
-    public function getCampaigns(string $programName, array $options = array())
+    public function getCampaigns(array $options = array())
     {
-        $endpoint = '/rest/v1/campaigns.json?programName=' . $programName;
+        $endpoint = '/rest/v1/campaigns.json';
 
-        if (!empty($options['nextPageToken'])) {
-            $endpoint = $endpoint . '&nextPageToken=' . $options['nextPageToken'];
+        foreach ($options as $key => $value) {
+            if (!empty($key)) {
+                $endpoint = strpos($endpoint, '.json?') ? $endpoint . '&' : $endpoint . '?';
+                $endpoint = $endpoint . $key . '=' . $value;
+            }
         }
 
         try {

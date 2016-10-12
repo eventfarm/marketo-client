@@ -67,19 +67,10 @@ class Leads
         // Add &batchSize=1 to test batches of campaigns
         $endpoint = '/rest/v1/leads/programs/' . $programId . '.json';
 
-        if (!empty($options['fields'])) {
-            if (strpos($endpoint, '.json?')) {
-                $endpoint = $endpoint . '&fields=' . $options['fields'];
-            } else {
-                $endpoint = $endpoint . '?fields=' . $options['fields'];
-            }
-        }
-
-        if (!empty($options['nextPageToken'])) {
-            if (strpos($endpoint, '.json?')) {
-                $endpoint = $endpoint . '&nextPageToken=' . $options['nextPageToken'];
-            } else {
-                $endpoint = $endpoint . '?nextPageToken=' . $options['nextPageToken'];
+        foreach ($options as $key => $value) {
+            if (!empty($key)) {
+                $endpoint = strpos($endpoint, '.json?') ? $endpoint . '&' : $endpoint . '?';
+                $endpoint = $endpoint . $key . '=' . $value;
             }
         }
 

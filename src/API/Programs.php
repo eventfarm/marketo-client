@@ -19,8 +19,11 @@ class Programs
     {
         $endpoint = '/rest/asset/v1/programs.json?maxReturn=200';
 
-        if (!empty($options['offset'])) {
-            $endpoint = $endpoint . '&offset=' . $options['offset'];
+        foreach ($options as $key => $value) {
+            if (!empty($key)) {
+                $endpoint = strpos($endpoint, '.json?') ? $endpoint . '&' : $endpoint . '?';
+                $endpoint = $endpoint . $key . '=' . $value;
+            }
         }
 
         try {
