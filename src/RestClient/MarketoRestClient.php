@@ -42,14 +42,14 @@ class MarketoRestClient
         RestClientInterface $restClient,
         MarketoProviderInterface $marketoProvider,
         AccessToken $accessToken,
-        int $maxRetryRequests,
-        TokenRefreshInterface $tokenRefreshCallback = null
+        TokenRefreshInterface $tokenRefreshCallback = null,
+        int $maxRetryRequests
     ) {
         $this->restClient = $restClient;
         $this->marketoProvider = $marketoProvider;
         $this->accessToken = $accessToken;
-        $this->maxRetryRequests = $maxRetryRequests;
         $this->tokenRefreshCallback = $tokenRefreshCallback;
+        $this->maxRetryRequests = $maxRetryRequests;
     }
 
     public function request(string $method, string $uri = '', array $options = []):ResponseInterface

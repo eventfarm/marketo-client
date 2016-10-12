@@ -32,16 +32,16 @@ class MarketoClient
         string $accessToken,
         int $tokenExpiresIn,
         int $tokenLastRefresh,
-        int $maxRetryRequests = self::DEFAULT_MAX_RETRY_REQUESTS,
-        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT
+        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT,
+        int $maxRetryRequests = self::DEFAULT_MAX_RETRY_REQUESTS
     ) {
     
         return new self(
             $restClient,
             $marketoProvider,
             new AccessToken($accessToken, $tokenExpiresIn, $tokenLastRefresh),
-            $maxRetryRequests,
-            $tokenRefreshObject
+            $tokenRefreshObject,
+            $maxRetryRequests
         );
     }
     public static function withDefaults(
@@ -51,10 +51,9 @@ class MarketoClient
         string $clientId,
         string $clientSecret,
         string $baseUrl,
-        int $maxRetryRequests = self::DEFAULT_MAX_RETRY_REQUESTS,
-        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT
+        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT,
+        int $maxRetryRequests = self::DEFAULT_MAX_RETRY_REQUESTS
     ) {
-    
         $restClient = GuzzleRestClient::createClient($baseUrl);
         $marketoProvider =
             KristenlkMarketoProvider::createDefaultProvider(
@@ -66,23 +65,23 @@ class MarketoClient
             $restClient,
             $marketoProvider,
             new AccessToken($accessToken, $tokenExpiresIn, $tokenLastRefresh),
-            $maxRetryRequests,
-            $tokenRefreshObject
+            $tokenRefreshObject,
+            $maxRetryRequests
         );
     }
     private function __construct(
         RestClientInterface $restClient,
         MarketoProviderInterface $marketoProvider,
         AccessToken $accessToken,
-        int $maxRetryRequests,
-        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT
+        $tokenRefreshObject,
+        int $maxRetryRequests
     ) {
         $this->client = new MarketoRestClient(
             $restClient,
             $marketoProvider,
             $accessToken,
-            $maxRetryRequests,
-            $tokenRefreshObject
+            $tokenRefreshObject,
+            $maxRetryRequests
         );
     }
 
