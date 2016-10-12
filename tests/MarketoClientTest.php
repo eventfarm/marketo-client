@@ -23,7 +23,7 @@ class MarketoClientTest extends \PHPUnit_Framework_TestCase
             '/rest/v1/campaigns.json?programName=' . $programName,
             $this->getAuthorizationHeader()
         );
-        $marketoClient->campaigns()->getCampaigns($programName);
+        $marketoClient->campaigns()->getCampaigns();
     }
 
     public function testGetCampaignsSendsCorrectRequestWithOptions()
@@ -42,7 +42,7 @@ class MarketoClientTest extends \PHPUnit_Framework_TestCase
             '/rest/v1/campaigns.json?programName=' . $programName . '&nextPageToken=' . $nextPageToken,
             $this->getAuthorizationHeader()
         );
-        $marketoClient->campaigns()->getCampaigns($programName, ['nextPageToken' => $nextPageToken]);
+        $marketoClient->campaigns()->getCampaigns(['programName' => $programName, 'nextPageToken' => $nextPageToken]);
     }
 
     public function testTriggerCampaignSendsCorrectRequestWithOptions()
