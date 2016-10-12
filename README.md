@@ -47,3 +47,38 @@ You can either use the provided [GuzzleRestClient](./src/RestClient/GuzzleRestCl
 Our default Marketo provider is my [Marketo Provider](https://github.com/kristenlk/oauth2-marketo) library.
 
 You can either use the provided [KristenlkMarketoProvider](./src/Oauth/KristenlkMarketoProvider.php) or use your own that implements our [MarketoProviderInterface](./src/Oauth/MarketoProviderInterface.php).
+
+## Example Client Implementation
+
+```php
+<?php
+namespace App;
+
+use Kristenlk\Marketo\Oauth\AccessToken;
+use Kristenlk\Marketo\MarketoClient;
+use Kristenlk\Marketo\TokenRefreshInterface;
+
+class DemoMarketoClient implements TokenRefreshInterface
+{
+    public function getMarketoClient():MarketoClient
+    {
+        if (empty($this->marketo)) {
+            $this->marketo = MarketoClient::withDefaults(
+                'ACCESS_TOKEN',
+                'TOKEN_EXPIRES_IN', // when the current access token expires (as a UNIX timestamp)
+                'TOKEN_LAST_REFRESH', // when the current access token was last refreshed (as a UNIX timestamp)
+                'CLIENT_ID',
+                'CLIENT_SECRET',
+                'BASE_URL',
+                $this // TokenRefreshInterface
+            );
+        }
+        return $this->marketo;
+    }
+
+    public function tokenRefreshCallback(AccessToken $token)
+    {
+        // CALLBACK FUNCTION TO STORE THE REFRESHED $token TO PERSISTANCE LAYER
+    }
+}
+```
