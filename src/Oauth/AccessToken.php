@@ -1,8 +1,6 @@
 <?php
 namespace Kristenlk\Marketo\Oauth;
 
-// use Kristenlk\OAuth2\Client\Token\AccessToken;
-
 class AccessToken implements AccessTokenInterface
 {
     private $accessToken;
