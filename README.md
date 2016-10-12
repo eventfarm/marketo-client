@@ -1,11 +1,11 @@
 # marketo-client
 
-<!-- [![Travis](https://img.shields.io/travis/kristenlk/marketo-client.svg?maxAge=2592000?style=flat-square)](https://travis-ci.org/kristenlk/marketo-client)
+[![Travis](https://img.shields.io/travis/kristenlk/marketo-client.svg?maxAge=2592000?style=flat-square)](https://travis-ci.org/kristenlk/marketo-client)
 [![Downloads](https://img.shields.io/packagist/dt/kristenlk/marketo-client.svg?style=flat-square)](https://packagist.org/packages/kristenlk/marketo-client)
 [![Packagist](https://img.shields.io/packagist/l/kristenlk/marketo-client.svg?maxAge=2592000?style=flat-square)](https://packagist.org/packages/kristenlk/marketo-client)
 [![Code Climate](https://codeclimate.com/github/kristenlk/marketo-client/badges/gpa.svg)](https://codeclimate.com/github/kristenlk/marketo-client)
 [![Test Coverage](https://codeclimate.com/github/kristenlk/marketo-client/badges/coverage.svg)](https://codeclimate.com/github/kristenlk/marketo-client/coverage)
- -->
+
 This package provides an interface for interacting with the Marketo REST API.
 
 ## Installation

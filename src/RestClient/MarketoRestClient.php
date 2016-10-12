@@ -26,21 +26,6 @@ class MarketoRestClient
     private $accessToken;
 
     /**
-     * @var string
-     */
-    private $clientId;
-
-    /**
-     * @var string
-     */
-    private $clientSecret;
-
-    /**
-     * @var string
-     */
-    private $baseUrl;
-
-    /**
      * @var TokenRefreshInterface|null
      */
     private $tokenRefreshCallback;
