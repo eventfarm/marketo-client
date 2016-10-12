@@ -40,8 +40,8 @@ class MarketoClient
             $restClient,
             $marketoProvider,
             new AccessToken($accessToken, $tokenExpiresIn, $tokenLastRefresh),
-            $tokenRefreshObject,
-            $maxRetryRequests
+            $maxRetryRequests,
+            $tokenRefreshObject
         );
     }
     public static function withDefaults(
