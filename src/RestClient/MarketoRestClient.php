@@ -68,12 +68,13 @@ class MarketoRestClient
 
     private function isTokenValid($responseBody):bool
     {
-        // Depending on the endpoint, the JSON Marketo returns will always contain an errors key (like getPrograms does) or will only contain an errors key if there are errors (like getCampaigns does)
+        /* Depending on the endpoint, the JSON Marketo returns will always contain an errors key (like getPrograms
+        does) or will only contain an errors key if there are errors (like getCampaigns does) */
         if (property_exists($responseBody, "errors")) {
             if (!empty($responseBody->errors)) {
                 $errorCodes = array(self::TOKEN_INVALID, self::TOKEN_EXPIRED);
 
-                foreach($responseBody->errors as $error) {
+                foreach ($responseBody->errors as $error) {
                     if (in_array($error->code, $errorCodes)) {
                         return false;
                     }

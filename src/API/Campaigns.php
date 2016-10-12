@@ -3,8 +3,8 @@ namespace Kristenlk\Marketo\API;
 
 use Kristenlk\Marketo\RestClient\MarketoRestClient;
 
-
-class Campaigns {
+class Campaigns
+{
     /**
      * @var MarketoClientInterface
      */
@@ -54,4 +54,3 @@ class Campaigns {
         }
     }
 }
-?>

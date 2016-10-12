@@ -3,7 +3,8 @@ namespace Kristenlk\Marketo\API;
 
 use Kristenlk\Marketo\RestClient\MarketoRestClient;
 
-class Statuses {
+class Statuses
+{
     /**
      * @var MarketoClientInterface
      */
@@ -26,4 +27,3 @@ class Statuses {
         }
     }
 }
-?>

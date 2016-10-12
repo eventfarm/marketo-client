@@ -3,7 +3,8 @@ namespace Kristenlk\Marketo\API;
 
 use Kristenlk\Marketo\RestClient\MarketoRestClient;
 
-class Leads {
+class Leads
+{
     /**
      * @var MarketoClientInterface
      */
@@ -90,4 +91,3 @@ class Leads {
         }
     }
 }
-?>

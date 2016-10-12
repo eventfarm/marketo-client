@@ -32,8 +32,8 @@ class MarketoClient
         string $accessToken,
         int $tokenExpiresIn,
         int $tokenLastRefresh,
-        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT,
-        int $maxRetryRequests = self::DEFAULT_MAX_RETRY_REQUESTS
+        int $maxRetryRequests = self::DEFAULT_MAX_RETRY_REQUESTS,
+        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT
     ) {
     
         return new self(
@@ -51,8 +51,8 @@ class MarketoClient
         string $clientId,
         string $clientSecret,
         string $baseUrl,
-        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT,
-        int $maxRetryRequests = self::DEFAULT_MAX_RETRY_REQUESTS
+        int $maxRetryRequests = self::DEFAULT_MAX_RETRY_REQUESTS,
+        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT
     ) {
     
         $restClient = GuzzleRestClient::createClient($baseUrl);
@@ -66,16 +66,16 @@ class MarketoClient
             $restClient,
             $marketoProvider,
             new AccessToken($accessToken, $tokenExpiresIn, $tokenLastRefresh),
-            $tokenRefreshObject,
-            $maxRetryRequests
+            $maxRetryRequests,
+            $tokenRefreshObject
         );
     }
     private function __construct(
         RestClientInterface $restClient,
         MarketoProviderInterface $marketoProvider,
         AccessToken $accessToken,
-        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT,
-        int $maxRetryRequests
+        int $maxRetryRequests,
+        TokenRefreshInterface $tokenRefreshObject = self::DEFAULT_TOKEN_REFRESH_OBJECT
     ) {
         $this->client = new MarketoRestClient(
             $restClient,
