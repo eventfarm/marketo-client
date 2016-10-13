@@ -15,7 +15,7 @@ class Leads
         $this->marketoRestClient = $marketoRestClient;
     }
 
-    public function createOrUpdateLeads(array $options = array())
+    public function createOrUpdateLeads(array $options)
     {
         $endpoint = '/rest/v1/leads.json';
 
@@ -39,7 +39,7 @@ class Leads
         }
     }
 
-    public function updateLeadsProgramStatus(int $programId, array $options = array())
+    public function updateLeadsProgramStatus(int $programId)
     {
         $endpoint = '/rest/v1/leads/programs/' . $programId . '/status.json';
 

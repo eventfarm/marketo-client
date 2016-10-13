@@ -34,7 +34,7 @@ class Campaigns
         }
     }
 
-    public function triggerCampaign(int $campaignId, array $options = array())//:stdClass
+    public function triggerCampaign(int $campaignId, array $options)//:stdClass
     {
         $endpoint = '/rest/v1/campaigns/' . $campaignId . '/trigger.json';
 

@@ -91,7 +91,7 @@ class DemoMarketoClient implements TokenRefreshInterface
 [Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Campaigns/getCampaignsUsingGET)
 Returns a list of campaign records. Refer to the docs for the full list of options.
 
-`public function getCampaigns(array $options = array()):stdClass`
+`public function getCampaigns(array $options = array())`
 
 ```php
 <?php
@@ -111,7 +111,9 @@ $campaigns = $demoMarketoClient->campaigns()->getCampaigns($options);
 [Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Campaigns/triggerCampaignUsingPOST)
 Passes a set of leads to a trigger campaign to run through the campaign's flow. Refer to the docs for the full list of options.
 
-`public function triggerCampaign(int $campaignId, array $options = array()):stdClass`
+* A **campaignId** and an array of options that includes an **input** key (mapped to an array that contains arrays of lead data) must be passed to `triggerCampaign()`.
+
+`public function triggerCampaign(int $campaignId, array $options)`
 
 ```php
 <?php
@@ -125,7 +127,7 @@ $options = [
                 "id" => 1234
             ]
         ]
-    ]
+    ]//, additional options
 ];
 
 $campaign = $demoMarketoClient->campaigns()->triggerCampaign($campaignId, $options);
@@ -138,7 +140,7 @@ $campaign = $demoMarketoClient->campaigns()->triggerCampaign($campaignId, $optio
 [Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/describeUsingGET_2)
 Returns metadata about lead objects in the target instance, including a list of all fields available for interaction via the APIs.
 
-`public function getLeadFields():stdClass`
+`public function getLeadFields()`
 
 ```php
 <?php
@@ -153,9 +155,15 @@ $leadFields = $demoMarketoClient->leadFields()->getLeadFields();
 [Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/syncLeadUsingPOST)
 Syncs a list of leads to the target instance. Refer to the docs for the full list of options.
 
-`public function createOrUpdateLeads(array $options = array()):stdClass`
+* An array of options that includes an **input** key (mapped to an array that contains arrays of lead data) must be passed to `createOrUpdateLeads()`.
 
-##### Example 1: Creating or updating leads
+`public function createOrUpdateLeads(array $options)`
+
+By default, Marketo sets the type of sync operation (`action`) to `createOrUpdate` and the `lookupField` to `email`. If using those defaults:
+- Email is not required; if an email is not included in a lead array, Marketo will create a lead without an email.
+- When an email is included, Marketo will search for existing leads with that email. If one is found, Marketo will update the found lead with the data sent; if one is not found, Marketo will create a new lead with the data sent.
+- NOTE: If Marketo finds more than one lead with the same email, none of the leads will be updated.
+
 ```php
 <?php
 $demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
@@ -172,9 +180,35 @@ $options = [
             "firstName" => "Example2First",
             "lastName" => "Example2Last"
         ]
-    ]
+    ]//, additional options
 ];
 
 $leads = $demoMarketoClient->leads()->createOrUpdateLeads($options);
+// $leads = { ... }
+```
+
+#### Update Leads' Program Status
+[Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/changeLeadProgramStatusUsingPOST)
+Changes the program status of a list of leads in a target program. Refer to the docs for the full list of options.
+
+* A **programId** and an array of options that includes an **input** key (mapped to an array that contains arrays of lead data) and a **status** key (mapped to a program status) must be passed to `updateLeadsProgramStatus()`.
+
+`public function updateLeadsProgramStatus(int $programId, array $options)`
+
+```php
+<?php
+$demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
+
+$programId = 1234;
+$options = [
+    "input" => [
+        [
+            "id" => 1111
+        ]
+    ],
+    "status" => "Registered"
+];
+
+$leads = $demoMarketoClient->leads()->updateLeadsProgramStatus($programId, $options);
 // $leads = { ... }
 ```
