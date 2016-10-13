@@ -82,3 +82,26 @@ class DemoMarketoClient implements TokenRefreshInterface
     }
 }
 ```
+
+## Usage
+
+#### Campaigns
+
+[Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Campaigns/getCampaignsUsingGET) Returns a list of Marketo campaigns. Refer to the docs for the full list of options.
+
+`public function getCampaigns():stdClass`
+
+```php
+<?php
+$demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
+
+$options = [
+  "programName" => "My Marketo Program",
+  "batchSize" => 10
+];
+
+$campaigns = $demoMarketoClient->campaigns()->getCampaigns($options);
+// getCampaigns() can also be called without options.
+
+// $campaigns = { ... }
+```
