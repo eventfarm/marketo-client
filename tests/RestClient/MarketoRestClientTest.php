@@ -41,8 +41,8 @@ class MarketoRestClientTest extends \PHPUnit_Framework_TestCase
             $restClient,
             $provider,
             $accessToken,
-            $maxRetry,
-            $tokenRefreshCallback
+            $tokenRefreshCallback,
+            $maxRetry
         );
         $this->expectException(RetryAuthorizationTokenFailedException::class);
         $marketoProvider->request('GET', '/example/getExample');
@@ -86,8 +86,8 @@ class MarketoRestClientTest extends \PHPUnit_Framework_TestCase
             $restClient,
             $provider,
             $accessToken,
-            $maxRetry,
-            $tokenRefreshCallback
+            $tokenRefreshCallback,
+            $maxRetry
         );
         $response = $marketoProvider->request('GET', '/example/getExample');
         $this->assertSame(200, $response->getStatusCode());
@@ -131,8 +131,8 @@ class MarketoRestClientTest extends \PHPUnit_Framework_TestCase
             $restClient,
             $provider,
             $accessToken,
-            $maxRetry,
-            $tokenRefreshCallback
+            $tokenRefreshCallback,
+            $maxRetry
         );
         $response = $marketoProvider->request('GET', '/example/getExample');
         $this->assertSame(200, $response->getStatusCode());
