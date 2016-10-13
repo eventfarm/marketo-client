@@ -1,5 +1,5 @@
 {
-    "name": "kristenlk/marketo",
+    "name": "kristenlk/marketo-client",
     "description": "A PHP client for the Marketo REST API.",
     "keywords": ["marketo", "marketo api"],
     "license": "MIT",
