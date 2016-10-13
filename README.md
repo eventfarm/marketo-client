@@ -85,11 +85,13 @@ class DemoMarketoClient implements TokenRefreshInterface
 
 ## Usage
 
-#### Campaigns
+### Campaigns
 
-[Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Campaigns/getCampaignsUsingGET) Returns a list of Marketo campaigns. Refer to the docs for the full list of options.
+#### Get Campaigns
+[Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Campaigns/getCampaignsUsingGET)
+Returns a list of campaign records. Refer to the docs for the full list of options.
 
-`public function getCampaigns():stdClass`
+`public function getCampaigns(array $options = array()):stdClass`
 
 ```php
 <?php
@@ -102,6 +104,76 @@ $options = [
 
 $campaigns = $demoMarketoClient->campaigns()->getCampaigns($options);
 // getCampaigns() can also be called without options.
-
 // $campaigns = { ... }
+```
+
+#### Trigger Campaign
+[Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Campaigns/triggerCampaignUsingPOST)
+Passes a set of leads to a trigger campaign to run through the campaign's flow. Refer to the docs for the full list of options.
+
+`public function triggerCampaign(int $campaignId, array $options = array()):stdClass`
+
+```php
+<?php
+$demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
+
+$campaignId = 1029;
+$options = [
+    "input" => [
+        "leads" => [
+            [
+                "id" => 1234
+            ]
+        ]
+    ]
+];
+
+$campaign = $demoMarketoClient->campaigns()->triggerCampaign($campaignId, $options);
+// $campaign = { ... }
+```
+
+### Lead Fields
+
+#### Get Lead Fields
+[Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/describeUsingGET_2)
+Returns metadata about lead objects in the target instance, including a list of all fields available for interaction via the APIs.
+
+`public function getLeadFields():stdClass`
+
+```php
+<?php
+$demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
+$leadFields = $demoMarketoClient->leadFields()->getLeadFields();
+// $leadFields = { ... }
+```
+
+### Leads
+
+#### Create or Update Leads
+[Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/syncLeadUsingPOST)
+Syncs a list of leads to the target instance. Refer to the docs for the full list of options.
+
+`public function createOrUpdateLeads(array $options = array()):stdClass`
+
+```php
+<?php
+$demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
+
+$options = [
+    "input" => [
+        [
+            "email" => "email1@example.com",
+            "firstName" => "Example1First",
+            "lastName" => "Example1Last"
+        ],
+        [
+            "email" => "email2@example.com",
+            "firstName" => "Example2First",
+            "lastName" => "Example2Last"
+        ]
+    ]
+];
+
+$leads = $demoMarketoClient->leads()->createOrUpdateLeads($options);
+// $leads = { ... }
 ```
