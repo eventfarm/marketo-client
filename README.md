@@ -155,6 +155,7 @@ Syncs a list of leads to the target instance. Refer to the docs for the full lis
 
 `public function createOrUpdateLeads(array $options = array()):stdClass`
 
+##### Example 1: Creating or updating leads
 ```php
 <?php
 $demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
