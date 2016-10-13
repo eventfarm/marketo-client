@@ -13,14 +13,13 @@ class MarketoClientTest extends \PHPUnit_Framework_TestCase
         // Arrange
         $marketoProvider = $this->getMarketoProviderMock();
         $response = $this->getResponseMock();
-        $programName = 'My Program Name';
 
         // Act/Assert
         $marketoClient = $this->getMarketoClientWithParameterAsserts(
             $response,
             $marketoProvider,
             'get',
-            '/rest/v1/campaigns.json?programName=' . $programName,
+            '/rest/v1/campaigns.json',
             $this->getAuthorizationHeader()
         );
         $marketoClient->campaigns()->getCampaigns();
