@@ -1,13 +1,21 @@
 language: php
+
 php:
+  - 5.5
+  - 5.6
   - 7.0
-  - 7.1
-sudo: false
+  - hhvm
+
 before_script:
-  - composer self-update
-  - composer install
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source --dev
+  - travis_retry phpenv rehash
+
 script:
-  - vendor/bin/phpcs --standard=PSR2 src/
-  - vendor/bin/phpunit -c phpunit.xml
+  # - ./vendor/bin/phpcs --standard=psr2 src/
+  - ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
 after_script:
-  - ./bin/codeclimate.sh
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  
