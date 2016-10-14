@@ -15,9 +15,16 @@ class Statuses
         $this->marketoRestClient = $marketoRestClient;
     }
 
-    public function getStatuses(string $programChannel)
+    public function getStatuses(string $programChannel, array $options = array())
     {
         $endpoint = '/rest/asset/v1/channel/byName.json?name=' . $programChannel;
+
+        foreach ($options as $key => $value) {
+            if (!empty($key)) {
+                $endpoint = strpos($endpoint, '.json?') ? $endpoint . '&' : $endpoint . '?';
+                $endpoint = $endpoint . $key . '=' . $value;
+            }
+        }
 
         try {
             $response = $this->marketoRestClient->request('get', $endpoint);
