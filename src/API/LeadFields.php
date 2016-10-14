@@ -15,9 +15,16 @@ class LeadFields
         $this->marketoRestClient = $marketoRestClient;
     }
 
-    public function getLeadFields()
+    public function getLeadFields(array $options = array())
     {
         $endpoint = '/rest/v1/leads/describe.json';
+
+        foreach ($options as $key => $value) {
+            if (!empty($key)) {
+                $endpoint = strpos($endpoint, '.json?') ? $endpoint . '&' : $endpoint . '?';
+                $endpoint = $endpoint . $key . '=' . $value;
+            }
+        }
 
         try {
             $response = $this->marketoRestClient->request('get', $endpoint);

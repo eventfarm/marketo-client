@@ -39,7 +39,7 @@ class Leads
         }
     }
 
-    public function updateLeadsProgramStatus(int $programId)
+    public function updateLeadsProgramStatus(int $programId, array $options = array())
     {
         $endpoint = '/rest/v1/leads/programs/' . $programId . '/status.json';
 

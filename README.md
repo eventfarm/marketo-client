@@ -14,9 +14,7 @@ This package provides an interface for interacting with the Marketo REST API.
 $ composer require kristenlk/marketo-client
 ```
 
-Or.
-
-Add the following lines to your ``composer.json`` file.
+Or add the following lines to your ``composer.json`` file:
 
 ```json
 {
@@ -111,7 +109,7 @@ $campaigns = $demoMarketoClient->campaigns()->getCampaigns($options);
 [Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Campaigns/triggerCampaignUsingPOST)
 Passes a set of leads to a trigger campaign to run through the campaign's flow. Refer to the docs for the full list of options.
 
-* A **campaignId** and an array of options that includes an **input** key (mapped to an array that contains arrays of lead data) must be passed to `triggerCampaign()`.
+* A `campaignId` and an array of options that includes an `input` key (mapped to an array that contains arrays of lead data) must be passed to `triggerCampaign()`.
 
 `public function triggerCampaign(int $campaignId, array $options)`
 
@@ -140,11 +138,12 @@ $campaign = $demoMarketoClient->campaigns()->triggerCampaign($campaignId, $optio
 [Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/describeUsingGET_2)
 Returns metadata about lead objects in the target instance, including a list of all fields available for interaction via the APIs.
 
-`public function getLeadFields()`
+`public function getLeadFields(array $options = array())`
 
 ```php
 <?php
 $demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
+
 $leadFields = $demoMarketoClient->leadFields()->getLeadFields();
 // $leadFields = { ... }
 ```
@@ -155,7 +154,7 @@ $leadFields = $demoMarketoClient->leadFields()->getLeadFields();
 [Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/syncLeadUsingPOST)
 Syncs a list of leads to the target instance. Refer to the docs for the full list of options.
 
-* An array of options that includes an **input** key (mapped to an array that contains arrays of lead data) must be passed to `createOrUpdateLeads()`.
+* An array of options that includes an `input` key (mapped to an array that contains arrays of lead data) must be passed to `createOrUpdateLeads()`.
 
 `public function createOrUpdateLeads(array $options)`
 
@@ -191,7 +190,7 @@ $leads = $demoMarketoClient->leads()->createOrUpdateLeads($options);
 [Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/changeLeadProgramStatusUsingPOST)
 Changes the program status of a list of leads in a target program. Refer to the docs for the full list of options.
 
-* A **programId** and an array of options that includes an **input** key (mapped to an array that contains arrays of lead data) and a **status** key (mapped to a program status) must be passed to `updateLeadsProgramStatus()`.
+* A `programId` and an array of options that includes an `input` key (mapped to an array that contains arrays of lead data) and a `status` key (mapped to a program status) must be passed to `updateLeadsProgramStatus()`.
 
 `public function updateLeadsProgramStatus(int $programId, array $options)`
 
@@ -217,7 +216,7 @@ $leads = $demoMarketoClient->leads()->updateLeadsProgramStatus($programId, $opti
 [Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/getLeadsByProgramIdUsingGET)
 Retrieves a list of leads that are members of the designated program. Refer to the docs for the full list of options.
 
-* A **programId** must be passed to `getLeadsByProgram()`.
+* A `programId` must be passed to `getLeadsByProgram()`.
 
 `public function getLeadsByProgram(int $programId, array $options = array())`
 
@@ -234,3 +233,53 @@ $leads = $demoMarketoClient->leads()->getLeadsByProgram($programId, $options);
 // getLeadsByProgram() can also be called without options.
 // $leads = { ... }
 ```
+
+### Lead Partitions
+#### Get Lead Partitions
+[Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/getLeadPartitionsUsingGET)
+Returns a list of available partitions in the target instance. Refer to the docs for the full list of options.
+
+`public function getPartitions(array $options = array())`
+
+```php
+<?php
+$demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
+
+$partitions = $demoMarketoClient->partitions()->getPartitions();
+// $partitions = { ... }
+```
+
+### Programs
+#### Get Programs
+[Docs](http://developers.marketo.com/rest-api/endpoint-reference/asset-endpoint-reference/#!/Programs/browseProgramsUsingGET)
+Retrieves the list of accessible programs from the target instance. Refer to the docs for the full list of options.
+
+`public function getPrograms(array $options = array())`
+
+```php
+<?php
+$demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
+
+$programs = $demoMarketoClient->programs()->getPrograms();
+// $programs = { ... }
+```
+
+### Statuses
+#### Get Statuses
+[Docs](http://developers.marketo.com/rest-api/endpoint-reference/asset-endpoint-reference/#!/Channels/getChannelByNameUsingGET)
+Retrieves channels based on the provided name. Refer to the docs for the full list of options.
+
+* A `programChannel` must be passed to `getStatuses()`.
+
+`public function getStatuses(string $programChannel, array $options = array())`
+
+```php
+<?php
+$demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
+
+$programChannel = "Live Event";
+
+$programs = $demoMarketoClient->statuses()->getStatuses($programChannel);
+// $programs = { ... }
+```
+
