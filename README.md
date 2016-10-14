@@ -212,3 +212,25 @@ $options = [
 $leads = $demoMarketoClient->leads()->updateLeadsProgramStatus($programId, $options);
 // $leads = { ... }
 ```
+
+#### Get Leads by Program
+[Docs](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/getLeadsByProgramIdUsingGET)
+Retrieves a list of leads that are members of the designated program. Refer to the docs for the full list of options.
+
+* A **programId** must be passed to `getLeadsByProgram()`.
+
+`public function getLeadsByProgram(int $programId, array $options = array())`
+
+```php
+<?php
+$demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
+
+$programId = 1234;
+$options = [
+    "fields" => 'firstName,lastName,email,middleName,mktoIsPartner';
+];
+
+$leads = $demoMarketoClient->leads()->getLeadsByProgram($programId, $options);
+// getLeadsByProgram() can also be called without options.
+// $leads = { ... }
+```
