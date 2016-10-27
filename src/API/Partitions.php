@@ -1,7 +1,7 @@
 <?php
-namespace Kristenlk\Marketo\API;
+namespace EventFarm\Marketo\API;
 
-use Kristenlk\Marketo\RestClient\MarketoRestClient;
+use EventFarm\Marketo\RestClient\MarketoRestClient;
 
 class Partitions
 {

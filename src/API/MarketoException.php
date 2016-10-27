@@ -1,5 +1,5 @@
 <?php
-namespace Kristenlk\Marketo\API;
+namespace EventFarm\Marketo\API;
 
 /**
  * An exception for Marketo errors

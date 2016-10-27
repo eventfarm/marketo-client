@@ -1,7 +1,7 @@
 <?php
-namespace Kristenlk\Marketo\RestClient;
+namespace EventFarm\Marketo\RestClient;
 
-use Kristenlk\Marketo\RestClient\RestClientInterface;
+use EventFarm\Marketo\RestClient\RestClientInterface;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 

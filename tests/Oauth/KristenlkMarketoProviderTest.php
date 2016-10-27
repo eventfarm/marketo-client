@@ -1,7 +1,7 @@
 <?php
-namespace Kristenlk\Marketo\Tests\Oauth;
+namespace EventFarm\Marketo\Tests\Oauth;
 
-use Kristenlk\Marketo\Oauth\KristenlkMarketoProvider;
+use EventFarm\Marketo\Oauth\KristenlkMarketoProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use Mockery;
 use Kristenlk\OAuth2\Client\Provider\Marketo;
@@ -22,7 +22,7 @@ class KristenlkMarketoProviderTest extends \PHPUnit_Framework_TestCase
             ->andReturn($theLeagueAccessToken);
         $kristenlkMarketoProvider = new KristenlkMarketoProvider($marketoProvider);
         $accessToken = $kristenlkMarketoProvider->getAccessToken('client_credentials');
-        $this->assertInstanceOf(\Kristenlk\Marketo\Oauth\AccessToken::class, $accessToken);
+        $this->assertInstanceOf(\EventFarm\Marketo\Oauth\AccessToken::class, $accessToken);
         $this->assertSame($myAccessToken, $accessToken->getToken());
     }
 }

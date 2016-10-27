@@ -1,18 +1,18 @@
 <?php
-namespace Kristenlk\Marketo;
+namespace EventFarm\Marketo;
 
-use Kristenlk\Marketo\Oauth\AccessToken;
-use Kristenlk\Marketo\Oauth\MarketoProviderInterface;
-use Kristenlk\Marketo\Oauth\KristenlkMarketoProvider;
-use Kristenlk\Marketo\API\Programs;
-use Kristenlk\Marketo\API\Campaigns;
-use Kristenlk\Marketo\API\LeadFields;
-use Kristenlk\Marketo\API\Statuses;
-use Kristenlk\Marketo\API\Leads;
-use Kristenlk\Marketo\API\Partitions;
-use Kristenlk\Marketo\RestClient\GuzzleRestClient;
-use Kristenlk\Marketo\RestClient\RestClientInterface;
-use Kristenlk\Marketo\RestClient\MarketoRestClient;
+use EventFarm\Marketo\Oauth\AccessToken;
+use EventFarm\Marketo\Oauth\MarketoProviderInterface;
+use EventFarm\Marketo\Oauth\KristenlkMarketoProvider;
+use EventFarm\Marketo\API\Programs;
+use EventFarm\Marketo\API\Campaigns;
+use EventFarm\Marketo\API\LeadFields;
+use EventFarm\Marketo\API\Statuses;
+use EventFarm\Marketo\API\Leads;
+use EventFarm\Marketo\API\Partitions;
+use EventFarm\Marketo\RestClient\GuzzleRestClient;
+use EventFarm\Marketo\RestClient\RestClientInterface;
+use EventFarm\Marketo\RestClient\MarketoRestClient;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
 

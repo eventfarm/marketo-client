@@ -1,11 +1,11 @@
 <?php
-namespace Kristenlk\Marketo\RestClient;
+namespace EventFarm\Marketo\RestClient;
 
-use Kristenlk\Marketo\Oauth\AccessToken;
-use Kristenlk\Marketo\Oauth\MarketoProviderInterface;
-use Kristenlk\Marketo\Oauth\RetryAuthorizationTokenFailedException;
-use Kristenlk\Marketo\TokenRefreshInterface;
-use Kristenlk\Marketo\RestClient\RestClientInterface;
+use EventFarm\Marketo\Oauth\AccessToken;
+use EventFarm\Marketo\Oauth\MarketoProviderInterface;
+use EventFarm\Marketo\Oauth\RetryAuthorizationTokenFailedException;
+use EventFarm\Marketo\TokenRefreshInterface;
+use EventFarm\Marketo\RestClient\RestClientInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class MarketoRestClient

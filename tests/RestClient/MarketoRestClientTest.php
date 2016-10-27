@@ -1,12 +1,12 @@
 <?php
-namespace Kristenlk\Marketo\Tests\RestClient;
+namespace EventFarm\Marketo\Tests\RestClient;
 
-use Kristenlk\Marketo\Oauth\AccessToken;
-use Kristenlk\Marketo\Oauth\RetryAuthorizationTokenFailedException;
-use Kristenlk\Marketo\Oauth\KristenlkMarketoProvider;
-use Kristenlk\Marketo\RestClient\GuzzleRestClient;
-use Kristenlk\Marketo\RestClient\MarketoRestClient;
-use Kristenlk\Marketo\TokenRefreshInterface;
+use EventFarm\Marketo\Oauth\AccessToken;
+use EventFarm\Marketo\Oauth\RetryAuthorizationTokenFailedException;
+use EventFarm\Marketo\Oauth\KristenlkMarketoProvider;
+use EventFarm\Marketo\RestClient\GuzzleRestClient;
+use EventFarm\Marketo\RestClient\MarketoRestClient;
+use EventFarm\Marketo\TokenRefreshInterface;
 use GuzzleHttp\Psr7;
 use Mockery;
 use Psr\Http\Message\ResponseInterface;

@@ -1,7 +1,7 @@
 <?php
-namespace Kristenlk\Marketo\Tests\RestClient;
+namespace EventFarm\Marketo\Tests\RestClient;
 
-use Kristenlk\Marketo\RestClient\GuzzleRestClient;
+use EventFarm\Marketo\RestClient\GuzzleRestClient;
 use Mockery;
 use Psr\Http\Message\ResponseInterface;
 

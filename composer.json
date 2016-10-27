@@ -1,5 +1,5 @@
 {
-    "name": "kristenlk/marketo-client",
+    "name": "eventfarm/marketo-client",
     "description": "A PHP client for the Marketo REST API.",
     "keywords": ["marketo", "marketo api"],
     "license": "MIT",
@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Kristenlk\\Marketo\\": "src/"
+            "EventFarm\\Marketo\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Kristenlk\\Marketo\\Tests\\": "tests/"
+            "EventFarm\\Marketo\\Tests\\": "tests/"
         }
     }
 }

@@ -1,8 +1,8 @@
 <?php
-use Kristenlk\Marketo\Oauth\MarketoProviderInterface;
-use Kristenlk\Marketo\RestClient\RestClientInterface;
-use Kristenlk\Marketo\Oauth\AccessToken;
-use Kristenlk\Marketo\MarketoClient;
+use EventFarm\Marketo\Oauth\MarketoProviderInterface;
+use EventFarm\Marketo\RestClient\RestClientInterface;
+use EventFarm\Marketo\Oauth\AccessToken;
+use EventFarm\Marketo\MarketoClient;
 // use Mockery;
 use Psr\Http\Message\ResponseInterface;
 

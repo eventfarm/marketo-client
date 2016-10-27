@@ -1,5 +1,5 @@
 <?php
-namespace Kristenlk\Marketo\RestClient;
+namespace EventFarm\Marketo\RestClient;
 
 use Psr\Http\Message\ResponseInterface;
 

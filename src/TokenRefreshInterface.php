@@ -1,7 +1,7 @@
 <?php
-namespace Kristenlk\Marketo;
+namespace EventFarm\Marketo;
 
-use Kristenlk\Marketo\Oauth\AccessToken;
+use EventFarm\Marketo\Oauth\AccessToken;
 
 interface TokenRefreshInterface
 {

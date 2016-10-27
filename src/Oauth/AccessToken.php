@@ -1,5 +1,5 @@
 <?php
-namespace Kristenlk\Marketo\Oauth;
+namespace EventFarm\Marketo\Oauth;
 
 class AccessToken implements AccessTokenInterface
 {

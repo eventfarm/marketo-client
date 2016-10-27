@@ -1,17 +1,17 @@
 # marketo-client
 
-[![Travis](https://img.shields.io/travis/kristenlk/marketo-client.svg?maxAge=2592000?style=flat-square)](https://travis-ci.org/kristenlk/marketo-client)
-[![Downloads](https://img.shields.io/packagist/dt/kristenlk/marketo-client.svg?style=flat-square)](https://packagist.org/packages/kristenlk/marketo-client)
-[![Packagist](https://img.shields.io/packagist/l/kristenlk/marketo-client.svg?maxAge=2592000?style=flat-square)](https://packagist.org/packages/kristenlk/marketo-client)
-[![Code Climate](https://codeclimate.com/github/kristenlk/marketo-client/badges/gpa.svg)](https://codeclimate.com/github/kristenlk/marketo-client)
-[![Test Coverage](https://codeclimate.com/github/kristenlk/marketo-client/badges/coverage.svg)](https://codeclimate.com/github/kristenlk/marketo-client/coverage)
+[![Travis](https://img.shields.io/travis/eventfarm/marketo-client.svg?maxAge=2592000?style=flat-square)](https://travis-ci.org/eventfarm/marketo-client)
+[![Downloads](https://img.shields.io/packagist/dt/eventfarm/marketo-client.svg?style=flat-square)](https://packagist.org/packages/eventfarm/marketo-client)
+[![Packagist](https://img.shields.io/packagist/l/eventfarm/marketo-client.svg?maxAge=2592000?style=flat-square)](https://packagist.org/packages/eventfarm/marketo-client)
+[![Code Climate](https://codeclimate.com/github/eventfarm/marketo-client/badges/gpa.svg)](https://codeclimate.com/github/eventfarm/marketo-client)
+[![Test Coverage](https://codeclimate.com/github/eventfarm/marketo-client/badges/coverage.svg)](https://codeclimate.com/github/eventfarm/marketo-client/coverage)
 
 This package provides an interface for interacting with the Marketo REST API.
 
 ## Installation
 
 ```
-$ composer require kristenlk/marketo-client
+$ composer require eventfarm/marketo-client
 ```
 
 Or add the following lines to your ``composer.json`` file:
@@ -19,7 +19,7 @@ Or add the following lines to your ``composer.json`` file:
 ```json
 {
     "require": {
-        "kristenlk/marketo-client": "dev-master"
+        "eventfarm/marketo-client": "dev-master"
     }
 }
 ```
@@ -52,9 +52,9 @@ You can either use the provided [KristenlkMarketoProvider](./src/Oauth/Kristenlk
 <?php
 namespace App;
 
-use Kristenlk\Marketo\Oauth\AccessToken;
-use Kristenlk\Marketo\MarketoClient;
-use Kristenlk\Marketo\TokenRefreshInterface;
+use EventFarm\Marketo\Oauth\AccessToken;
+use EventFarm\Marketo\MarketoClient;
+use EventFarm\Marketo\TokenRefreshInterface;
 
 class DemoMarketoClient implements TokenRefreshInterface
 {
@@ -143,7 +143,6 @@ Returns metadata about lead objects in the target instance, including a list of 
 ```php
 <?php
 $demoMarketoClient = new DemoMarketoClient()->getMarketoClient();
-
 $leadFields = $demoMarketoClient->leadFields()->getLeadFields();
 // $leadFields = { ... }
 ```
@@ -161,7 +160,6 @@ Syncs a list of leads to the target instance. Refer to the docs for the full lis
 By default, Marketo sets the type of sync operation (`action`) to `createOrUpdate` and the `lookupField` to `email`. If using those defaults:
 - Email is not required; if an email is not included in a lead array, Marketo will create a lead without an email.
 - When an email is included, Marketo will search for existing leads with that email. If one is found, Marketo will update the found lead with the data sent; if one is not found, Marketo will create a new lead with the data sent.
-- NOTE: If Marketo finds more than one lead with the same email, none of the leads will be updated.
 
 ```php
 <?php

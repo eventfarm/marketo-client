@@ -1,5 +1,5 @@
 <?php
-namespace Kristenlk\Marketo\Oauth;
+namespace EventFarm\Marketo\Oauth;
 
 /**
  * An exception for when the max retry limit is reached when trying to
