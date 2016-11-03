@@ -18,8 +18,10 @@ class MarketoRestClientTest extends \PHPUnit_Framework_TestCase
         $restClient = Mockery::mock(GuzzleRestClient::class);
         $provider = Mockery::mock(KristenlkMarketoProvider::class);
         $accessToken = Mockery::mock(AccessToken::class);
-        $accessToken->shouldReceive('getExpires')
+        $accessToken->shouldReceive('getLastRefresh')
             ->andReturn(1234567890);
+        $accessToken->shouldReceive('getExpires')
+            ->andReturn(1000);
         $tokenRefreshCallback = Mockery::mock(TokenRefreshInterface::class);
         $tokenRefreshCallback->shouldReceive('tokenRefreshCallback');
         $provider->shouldReceive('getAccessToken')
@@ -53,8 +55,10 @@ class MarketoRestClientTest extends \PHPUnit_Framework_TestCase
         $restClient = Mockery::mock(GuzzleRestClient::class);
         $provider = Mockery::mock(KristenlkMarketoProvider::class);
         $accessToken = Mockery::mock(AccessToken::class);
-        $accessToken->shouldReceive('getExpires')
+        $accessToken->shouldReceive('getLastRefresh')
             ->andReturn(1234567890);
+        $accessToken->shouldReceive('getExpires')
+            ->andReturn(1000);
         $tokenRefreshCallback = Mockery::mock(TokenRefreshInterface::class);
         $tokenRefreshCallback->shouldReceive('tokenRefreshCallback');
         $provider->shouldReceive('getAccessToken')
@@ -98,8 +102,10 @@ class MarketoRestClientTest extends \PHPUnit_Framework_TestCase
         $restClient = Mockery::mock(GuzzleRestClient::class);
         $provider = Mockery::mock(KristenlkMarketoProvider::class);
         $accessToken = Mockery::mock(AccessToken::class);
-        $accessToken->shouldReceive('getExpires')
+        $accessToken->shouldReceive('getLastRefresh')
             ->andReturn(1234567890);
+        $accessToken->shouldReceive('getExpires')
+            ->andReturn(1000);
         $tokenRefreshCallback = Mockery::mock(TokenRefreshInterface::class);
         $tokenRefreshCallback->shouldReceive('tokenRefreshCallback');
         $provider->shouldReceive('getAccessToken')
