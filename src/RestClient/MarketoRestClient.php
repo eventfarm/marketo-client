@@ -117,7 +117,9 @@ class MarketoRestClient
     {
         $attempts = 0;
         do {
-            if (time() >= $this->accessToken->getExpires() - 300) {
+            $expirationTime = $this->accessToken->getLastRefresh() + $this->accessToken->getExpires();
+
+            if (time() >= $expirationTime - 300) {
                 $this->refreshAccessToken();
             }
 

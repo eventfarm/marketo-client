@@ -63,7 +63,7 @@ class DemoMarketoClient implements TokenRefreshInterface
         if (empty($this->marketo)) {
             $this->marketo = MarketoClient::withDefaults(
                 'ACCESS_TOKEN',
-                'TOKEN_EXPIRES_IN', // when the current access token expires (as a UNIX timestamp)
+                'TOKEN_EXPIRES_IN', // when the current access token expires (in seconds)
                 'TOKEN_LAST_REFRESH', // when the current access token was last refreshed (as a UNIX timestamp)
                 'CLIENT_ID',
                 'CLIENT_SECRET',
