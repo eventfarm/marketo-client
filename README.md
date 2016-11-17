@@ -76,7 +76,7 @@ class DemoMarketoClient implements TokenRefreshInterface
 
     public function tokenRefreshCallback(AccessToken $token)
     {
-        // CALLBACK FUNCTION TO STORE THE REFRESHED $token TO PERSISTANCE LAYER
+        // CALLBACK FUNCTION TO STORE THE REFRESHED $token TO PERSISTENCE LAYER
     }
 }
 ```
